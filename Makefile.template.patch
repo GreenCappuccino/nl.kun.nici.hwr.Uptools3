@@ -1,0 +1,54 @@
+--- ./Makefile.template	1999-05-19 05:35:06.000000000 -0500
++++ ./Makefile.template	2023-09-04 03:53:04.404015912 -0400
+@@ -5,7 +5,7 @@
+ # in order to let it work........
+ #
+ 
+-VERSION       = ##VERSION
++VERSION       = 3
+ MINOR_VERSION = 02
+ NICI_UPT      = $(NICI_CSRC)/uptools$(VERSION)
+ 
+@@ -35,7 +35,7 @@
+ # MY_TCL_DIR =  /usr/local_unipen
+ # MY_TCL_LIB = -L$(MY_TCL_DIR)/lib
+ # on my solaris system (trajanus):
+-MY_TCL_DIR =  /u6/nici/software/pak/tcltk8.0
++MY_TCL_DIR =  /app
+ MY_TCL_LIB = -L$(MY_TCL_DIR)/lib
+ 
+ EXPECTED_TK_VERSION  = '"8.0"'
+@@ -91,16 +91,20 @@
+ # it should say were to find them
+ 
+ # on most systems:
+-# X11_INCLUDE = /usr/local/X11R6/include
+-# X11_LIB     = /usr/local/X11R6/lib
++#X11_INCLUDE = /usr/local/X11R6/include
++#X11_LIB     = /usr/local/X11R6/lib
+ 
+ # on my solaris system:
+-X11_INCLUDE = /usr/openwin/include
+-X11_LIB     = /usr/openwin/lib
++# X11_INCLUDE = /usr/openwin/include
++# X11_LIB     = /usr/openwin/lib
+ # on my linux system
+ # X11_INCLUDE   = /usr/X11R6/include
+ # X11_LIB       = /usr/X11R6/lib
+ 
++# flatpak
++X11_INCLUDE = /app/include
++X11_LIB = /app/lib
++
+ MAY_USE_RANLIB = echo
+ 
+ ################################################################################
+@@ -165,7 +169,7 @@
+ ##Linux#CC       = gcc
+ ##Linux#CFLAGS   = -O4 -I. -I$(X11_INCLUDE) -Wall -pedantic -I$(UL_DIR)
+ ##Linux#SLFLAGS  = -O4 -I. -I$(X11_INCLUDE) -fPIC -Wall -pedantic
+-##Linux#SL_LD    = gcc -shared -Wl -o
++##Linux#SL_LD    = gcc -shared -o
+ ##Linux#SLSUFFIX = .so
+ ##Linux#LINK_LIBS     = -L/usr/X11R6/lib -lX11
+ ##Linux#L_LD     = ar ruv

@@ -1,0 +1,17 @@
+--- ./configure	1999-05-19 05:37:15.000000000 -0500
++++ ./configure	2023-09-04 01:28:47.447938254 -0400
+@@ -1,4 +1,4 @@
+-#!/bin/csh
++#!/app/bin/tcsh
+ #
+ # configure: a script to make the Makefile.header for use on any of these
+ # (tested) configurations:
+@@ -7,7 +7,7 @@
+ #
+ 
+ set UPTOOLS   = `grep "UPTOOLS = " Makefile.template | awk '{ print $3 }'\
+-   | tr - d '()'`
++   | tr -d '()'`
+ echo $UPTOOLS
+ if ( "$UPTOOLS" == "USE_PWD" ) then
+ 	set UPTOOLS = `pwd`

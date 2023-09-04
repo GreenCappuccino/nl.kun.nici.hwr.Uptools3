@@ -1,0 +1,83 @@
+app-id: nl.kun.nici.hwr.Uptools3
+runtime: org.freedesktop.Platform
+runtime-version: "22.08"
+sdk: org.freedesktop.Sdk
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --filesystem=home
+
+modules:
+  - name: tcsh
+    sources:
+      - type: archive
+        archive-type: tar-gzip
+        url: https://astron.com/pub/tcsh/tcsh-6.24.00.tar.gz
+        sha256: 60be2c504bd8f1fa6e424b1956495d7e7ced52a2ac94db5fd27f4b6bfc8f74f0
+    buildsystem: autotools
+  - name: tcl
+    buildsystem: autotools
+    subdir: unix
+    post-install:
+      - chmod 755 /app/lib/libtcl*.so
+    sources:
+      - type: archive
+        archive-type: tar-gzip
+        url: https://prdownloads.sourceforge.net/tcl/tcl8.6.13-src.tar.gz
+        sha256: 43a1fae7412f61ff11de2cfd05d28cfc3a73762f354a417c62370a54e2caf066
+        x-checker-data:
+          type: anitya
+          project-id: 4941
+          stable-only: true
+          url-template: https://prdownloads.sourceforge.net/tcl/tcl$version-src.tar.gz
+  - name: tk
+    buildsystem: autotools
+    subdir: unix
+    post-install:
+      - chmod 755 /app/lib/libtk*.so
+    sources:
+      - type: archive
+        archive-type: tar-gzip
+        url: https://prdownloads.sourceforge.net/tcl/tk8.6.13-src.tar.gz
+        sha256: 2e65fa069a23365440a3c56c556b8673b5e32a283800d8d9b257e3f584ce0675
+        x-checker-data:
+          type: anitya
+          project-id: 11426
+          stable-only: true
+          url-template: https://prdownloads.sourceforge.net/tcl/tk$version-src.tar.gz
+  - name: xmu
+    sources:
+      - type: archive
+        archive-type: tar-xz
+        url: https://www.x.org/archive/individual/lib/libXmu-1.1.4.tar.xz
+        sha256: 210de3ab9c3e9382572c25d17c2518a854ce6e2c62c5f8315deac7579e758244
+        x-checker-data:
+          type: anitya
+          project-id: 1785
+          url-template: https://www.x.org/archive/individual/lib/libXmu-$version.tar.xz
+    buildsystem: autotools
+  - name: Uptools3
+    sources:
+      - type: archive
+        archive-type: tar-gzip
+        url: https://web.archive.org/web/20060713001109/http://hwr.nici.kun.nl/unipen/uptools3/uptools3.tar.gz
+        sha256: 258c2acf0a45307717687fff6c76f2034b4911a399db86bc73702957179d7318
+      - type: patch
+        path: Makefile.template.patch
+      - type: patch
+        path: configure.patch
+      - type: patch
+        path: ink_master.c.patch
+      - type: patch
+        path: Makefile.patch
+    build-options:    
+      env:
+        NICI_BIN: /app/bin
+        NICI_LIB: /run/build/Uptools3/lib
+        NICI_SCRIPTS: /app/bin
+    buildsystem: simple
+    build-commands:
+      - ./configure
+      - make all
+      - make install
+

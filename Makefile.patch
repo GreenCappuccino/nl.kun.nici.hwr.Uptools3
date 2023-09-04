@@ -1,0 +1,36 @@
+--- ./Makefile	1999-05-19 05:38:23.000000000 -0500
++++ ./Makefile	2023-09-04 04:20:01.151846369 -0400
+@@ -65,7 +65,7 @@
+ 	@(if test -x allow_work ; then allow_work LOCK_UPTOOLS ; fi)
+ 
+ install_bin:
+-	@(if test ! -d $(UP_INSTALL_BIN) ; then mkinstalldirs $(UP_INSTALL_BIN) ; fi)
++	@(if test ! -d $(UP_INSTALL_BIN) ; then ./mkinstalldirs $(UP_INSTALL_BIN) ; fi)
+ #
+ #	@(cp -f $(UL_BIN)/upview      $(UP_INSTALL_BIN)/upview$(VERSION))
+ #	@(cp -f $(UL_BIN)/upread      $(UP_INSTALL_BIN)/upread$(VERSION))
+@@ -74,7 +74,7 @@
+ #
+ 
+ install_lib:
+-	@(if test ! -d $(UP_INSTALL_LIB) ; then mkinstalldirs $(UP_INSTALL_LIB) ; fi)
++	@(if test ! -d $(UP_INSTALL_LIB) ; then ./mkinstalldirs $(UP_INSTALL_LIB) ; fi)
+ #
+ #	@(cp -f $(UL_LIB)/libuplib$(VERSION)$(SLSUFFIX)  $(UP_INSTALL_LIB))
+ #	@(cp -f $(UL_LIB)/libink$(VERSION)$(SLSUFFIX)    $(UP_INSTALL_LIB))
+@@ -83,13 +83,13 @@
+ #
+ 
+ install_tcl:
+-	@(if test ! -d $(UP_INSTALL_TCL) ; then mkinstalldirs $(UP_INSTALL_TCL) ; fi)
++	@(if test ! -d $(UP_INSTALL_TCL) ; then ./mkinstalldirs $(UP_INSTALL_TCL) ; fi)
+ 	@(cp -f $(UL_BIN)/upworks  $(UP_INSTALL_TCL)/upworks$(VERSION))
+ 
+ 
+ install_tcl_stuff:
+ 	echo uptools library becomes $(UP_INSTALL_UL_LIB)
+-	@(if test ! -d $(UP_INSTALL_UL_LIB) ; then mkinstalldirs $(UP_INSTALL_UL_LIB) ; fi)
++	@(if test ! -d $(UP_INSTALL_UL_LIB) ; then ./mkinstalldirs $(UP_INSTALL_UL_LIB) ; fi)
+ 	@(if test ! -d $(UP_INSTALL_UL_LIB)/library ; \
+ 		then cd $(UPTOOLS)/Tools/Upworks; cp -f -r library $(UP_INSTALL_UL_LIB) ; \
+ 		fi)
