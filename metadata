@@ -1,0 +1,33 @@
+[Application]
+name=nl.kun.nici.hwr.Uptools3
+runtime=org.freedesktop.Platform/x86_64/22.08
+sdk=org.freedesktop.Sdk/x86_64/22.08
+command=/app/bin/tcsh
+
+[Environment]
+UL_BIN=/app/bin
+UL_LIB=/app/lib
+UL_TCL=/app/bin
+UNIPEN_INCLUDE_PATH=". .INHERIT"
+UNIPEN_DEFINITION_FILE=/app/lib/uptools3/unipen.def
+UNIPEN_LIBRARY=/app/lib
+UNIPEN_TCL_LIBRARY=/app/lib/uptools3/library
+TCLLIBPATH="$UNIPEN_LIBRARY"
+
+[Context]
+shared=ipc;
+sockets=x11;
+filesystems=home;
+
+[Extension nl.kun.nici.hwr.Uptools3.Locale]
+directory=share/runtime/locale
+autodelete=true
+locale-subset=true
+
+[Extension nl.kun.nici.hwr.Uptools3.Debug]
+directory=lib/debug
+autodelete=true
+no-autodownload=true
+
+[Build]
+built-extensions=nl.kun.nici.hwr.Uptools3.Locale;nl.kun.nici.hwr.Uptools3.Debug;

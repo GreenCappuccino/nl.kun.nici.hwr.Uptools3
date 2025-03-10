@@ -1,0 +1,11 @@
+--- ./Tools/Upread2/Makefile	1999-05-19 05:34:58.000000000 -0500
++++ ./Tools/Upread2/Makefile	2025-03-09 04:56:56.859333379 -0400
+@@ -44,7 +44,7 @@
+ 	@(echo made upread2)
+ $(UL_BIN)/upread2: upread2.o $(OBJ)
+ 	$(CC) -o $@ upread2.o $(OBJ)\
+-		-L$(NICI_LIB) -luplib$(VERSION) $(LINK_X11) -lXmu -lm
++		-L$(UL_LIB) -luplib$(VERSION) $(LINK_X11) -lXmu -lm
+ 
+ output_featchar.o: output_featchar.c upread2.h
+ 	$(CC) $(CFLAGS) $(USE_WID) -c output_featchar.c -o $@

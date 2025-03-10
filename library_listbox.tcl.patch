@@ -1,0 +1,15 @@
+--- ./tk8.0.4/library/listbox.tcl	1998-10-09 19:30:36.000000000 -0500
++++ ./tk8.0.4/library/listbox.tcl	2025-03-09 22:44:40.654197735 -0400
+@@ -176,9 +176,9 @@
+ # someone could use the "event generate" command to produce one
+ # on other platforms.
+ 
+-bind Listbox <MouseWheel> {
+-    %W yview scroll [expr - (%D / 120) * 4] units
+-}
++# bind Listbox <MouseWheel> {
++#     %W yview scroll [expr - (%D / 120) * 4] units
++# }
+ 
+ # tkListboxBeginSelect --
+ #

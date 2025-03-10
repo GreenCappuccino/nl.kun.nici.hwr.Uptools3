@@ -1,0 +1,20 @@
+--- /app/tmp/tcl8.0.4/unix/tclConfig.sh	1969-12-31 19:00:00.000000000 -0500
++++ /app/tmp/tcl8.0.4/unix/tclConfig.sh	2025-03-09 22:19:52.924367363 -0400
+@@ -91,7 +91,7 @@
+ 
+ # String to pass to linker to pick up the Tcl library from its
+ # build directory.
+-TCL_BUILD_LIB_SPEC='-L/run/build/tcl/tcl8.0.4/unix -ltcl8.0${TCL_DBGX}'
++TCL_BUILD_LIB_SPEC='-L/app/lib -ltcl8.0${TCL_DBGX}'
+ 
+ # String to pass to linker to pick up the Tcl library from its
+ # installed directory.
+@@ -122,7 +122,7 @@
+ # different place than the directory containing the source files, this
+ # points to the location of the sources, not the location where Tcl was
+ # compiled.
+-TCL_SRC_DIR='/run/build/tcl/tcl8.0.4'
++TCL_SRC_DIR='/app/tmp/tcl8.0.4'
+ 
+ # List of standard directories in which to look for packages during
+ # "package require" commands.  Contains the "prefix" directory plus also

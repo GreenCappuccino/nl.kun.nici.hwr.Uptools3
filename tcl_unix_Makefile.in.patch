@@ -1,0 +1,11 @@
+--- ./tcl8.0.4/unix/Makefile.in	1998-11-18 17:54:26.000000000 -0500
++++ ./tcl8.0.4/unix/Makefile.in	2025-03-09 22:10:14.704436859 -0400
+@@ -86,7 +86,7 @@
+ #CFLAGS = 		$(CFLAGS_DEBUG)
+ #CFLAGS = 		$(CFLAGS_OPTIMIZE)
+ #CFLAGS = 		$(CFLAGS_DEBUG) $(CFLAGS_OPTIMIZE)
+-CFLAGS = 		$(@CFLAGS_DEFAULT@)
++CFLAGS += 		$(@CFLAGS_DEFAULT@)
+ 
+ # To disable ANSI-C procedure prototypes reverse the comment characters
+ # on the following lines:

@@ -1,0 +1,11 @@
+--- ./tk8.0.4/unix/Makefile.in	1998-11-18 17:54:53.000000000 -0500
++++ ./tk8.0.4/unix/Makefile.in	2025-03-09 22:14:48.554406389 -0400
+@@ -97,7 +97,7 @@
+ #CFLAGS = 		$(CFLAGS_DEBUG)
+ #CFLAGS = 		$(CFLAGS_OPTIMIZE)
+ #CFLAGS = 		$(CFLAGS_DEBUG) $(CFLAGS_OPTIMIZE)
+-CFLAGS = 		$(@CFLAGS_DEFAULT@)
++CFLAGS += 		$(@CFLAGS_DEFAULT@)
+ 
+ # A "-I" switch that can be used when compiling to make all of the
+ # X11 include files accessible (the configure script will try to

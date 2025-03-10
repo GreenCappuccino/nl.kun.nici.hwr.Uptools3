@@ -1,0 +1,15 @@
+--- ./tk8.0.4/library/text.tcl	1998-10-09 19:30:36.000000000 -0500
++++ ./tk8.0.4/library/text.tcl	2025-03-09 22:52:55.474133669 -0400
+@@ -452,9 +452,9 @@
+ # someone could use the "event generate" command to produce one
+ # on other platforms.
+ 
+-bind Text <MouseWheel> {
+-    %W yview scroll [expr - (%D / 120) * 4] units
+-}
++# bind Text <MouseWheel> {
++#     %W yview scroll [expr - (%D / 120) * 4] units
++# }
+ 
+ # tkTextClosestGap --
+ # Given x and y coordinates, this procedure finds the closest boundary

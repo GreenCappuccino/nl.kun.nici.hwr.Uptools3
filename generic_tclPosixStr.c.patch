@@ -1,0 +1,30 @@
+--- ./tcl8.0.4/generic/tclPosixStr.c	1998-09-14 13:40:01.000000000 -0500
++++ ./tcl8.0.4/generic/tclPosixStr.c	2025-03-09 21:14:15.184819983 -0400
+@@ -336,9 +336,10 @@
+ #ifdef ENXIO
+ 	case ENXIO: return "ENXIO";
+ #endif
+-#ifdef EOPNOTSUPP
+-	case EOPNOTSUPP: return "EOPNOTSUPP";
+-#endif
++// ENOTSUP and EOPNOTSUPP have the same value on Linux
++// #ifdef EOPNOTSUPP
++// 	case EOPNOTSUPP: return "EOPNOTSUPP";
++// #endif
+ #ifdef EPERM
+ 	case EPERM: return "EPERM";
+ #endif
+@@ -783,9 +784,10 @@
+ #ifdef ENXIO
+ 	case ENXIO: return "no such device or address";
+ #endif
+-#ifdef EOPNOTSUPP
+-	case EOPNOTSUPP: return "operation not supported on socket";
+-#endif
++// ENOTSUP and EOPNOTSUPP have the same value on Linux
++// #ifdef EOPNOTSUPP
++// 	case EOPNOTSUPP: return "operation not supported on socket";
++// #endif
+ #ifdef EPERM
+ 	case EPERM: return "not owner";
+ #endif

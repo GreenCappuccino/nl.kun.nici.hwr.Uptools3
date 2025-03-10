@@ -2,6 +2,8 @@ app-id: nl.kun.nici.hwr.Uptools3
 runtime: org.freedesktop.Platform
 runtime-version: "22.08"
 sdk: org.freedesktop.Sdk
+command: /app/bin/tcsh
+metadata: metadata
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -17,34 +19,49 @@ modules:
     buildsystem: autotools
   - name: tcl
     buildsystem: autotools
-    subdir: unix
+    subdir: tcl8.0.4/unix
+    sources:
+      - type: archive
+        archive-type: tar-gzip
+        url: https://downloads.sourceforge.net/project/tcl/Tcl/8.0.4/tcl8.0.4.tar.gz
+        sha256: da29ae6a9d214390f73aa8ab51b066b4192db4e9edc08a976f40c3f3c304a7d7
+      - type: patch
+        path: generic_tclPosixStr.c.patch
+      - type: patch
+        path: tcl_unix_Makefile.in.patch
+      - type: file
+        path: app_tmp_tclConfig.sh.patch
+    build-options:
+      config-opts:
+        - --enable-gcc
+        - --enable-shared
     post-install:
       - chmod 755 /app/lib/libtcl*.so
-    sources:
-      - type: archive
-        archive-type: tar-gzip
-        url: https://prdownloads.sourceforge.net/tcl/tcl8.6.13-src.tar.gz
-        sha256: 43a1fae7412f61ff11de2cfd05d28cfc3a73762f354a417c62370a54e2caf066
-        x-checker-data:
-          type: anitya
-          project-id: 4941
-          stable-only: true
-          url-template: https://prdownloads.sourceforge.net/tcl/tcl$version-src.tar.gz
+      - mkdir -p /app/tmp
+      - cp -r $FLATPAK_BUILDER_BUILDDIR/tcl8.0.4 /app/tmp 
+      - patch -d/ -p0 -i $FLATPAK_BUILDER_BUILDDIR/app_tmp_tclConfig.sh.patch
   - name: tk
     buildsystem: autotools
-    subdir: unix
-    post-install:
-      - chmod 755 /app/lib/libtk*.so
+    subdir: tk8.0.4/unix
     sources:
       - type: archive
         archive-type: tar-gzip
-        url: https://prdownloads.sourceforge.net/tcl/tk8.6.13-src.tar.gz
-        sha256: 2e65fa069a23365440a3c56c556b8673b5e32a283800d8d9b257e3f584ce0675
-        x-checker-data:
-          type: anitya
-          project-id: 11426
-          stable-only: true
-          url-template: https://prdownloads.sourceforge.net/tcl/tk$version-src.tar.gz
+        url: https://downloads.sourceforge.net/project/tcl/Tcl/8.0.4/tk8.0.4.tar.gz
+        sha256: 53092b9769db04a36a979b3508a3de045b6a8795b4aac8c245a045fdb81cf119
+      - type: patch
+        path: tk_unix_Makefile.in.patch
+      - type: patch
+        path: library_listbox.tcl.patch
+      - type: patch
+        path: library_text.tcl.patch
+    build-options:
+      config-opts:
+        - --enable-gcc
+        - --with-tcl=/app/tmp/tcl8.0.4/unix
+        - --enable-shared
+    post-install:
+      - chmod 755 /app/lib/libtk*.so
+
   - name: xmu
     sources:
       - type: archive
@@ -65,19 +82,20 @@ modules:
       - type: patch
         path: Makefile.template.patch
       - type: patch
+        path: Tools_Upread2_Makefile.patch
+      - type: patch
+        path: Tools_Upworks_generic_read_unipen.c.patch
+      - type: patch
         path: configure.patch
       - type: patch
         path: ink_master.c.patch
       - type: patch
         path: Makefile.patch
-    build-options:    
-      env:
-        NICI_BIN: /app/bin
-        NICI_LIB: /run/build/Uptools3/lib
-        NICI_SCRIPTS: /app/bin
     buildsystem: simple
     build-commands:
       - ./configure
       - make all
       - make install
 
+post-install:
+  - rm -rf /app/tmp

@@ -1,14 +1,17 @@
 --- ./Makefile.template	1999-05-19 05:35:06.000000000 -0500
-+++ ./Makefile.template	2023-09-04 03:53:04.404015912 -0400
-@@ -5,7 +5,7 @@
++++ ./Makefile.template	2025-03-09 04:45:49.999410440 -0400
+@@ -5,9 +5,9 @@
  # in order to let it work........
  #
  
 -VERSION       = ##VERSION
 +VERSION       = 3
  MINOR_VERSION = 02
- NICI_UPT      = $(NICI_CSRC)/uptools$(VERSION)
+-NICI_UPT      = $(NICI_CSRC)/uptools$(VERSION)
++# NICI_UPT      = $(NICI_CSRC)/uptools$(VERSION)
  
+ UL_VERSION  = '"$(VERSION).$(MINOR_VERSION) March 1997  - L.Schomaker, L.Vuurpijl, G.Abbink  - NICI"'
+ UR_VERSION  = '"$(VERSION).$(MINOR_VERSION) March 1997  - L.Schomaker, L.Vuurpijl, G.Abbink  - NICI"'
 @@ -35,7 +35,7 @@
  # MY_TCL_DIR =  /usr/local_unipen
  # MY_TCL_LIB = -L$(MY_TCL_DIR)/lib
@@ -18,7 +21,28 @@
  MY_TCL_LIB = -L$(MY_TCL_DIR)/lib
  
  EXPECTED_TK_VERSION  = '"8.0"'
-@@ -91,16 +91,20 @@
+@@ -69,10 +69,16 @@
+ 
+ # our situation at nici: (variables come from my environment)
+ 
+-UP_INSTALL_BIN       = $(NICI_BIN)
+-UP_INSTALL_LIB       = $(NICI_LIB)
+-UP_INSTALL_TCL       = $(NICI_SCRIPTS)
+-UP_INSTALL_UL_LIB    = $(UP_INSTALL_LIB)/uptools$(VERSION)
++# UP_INSTALL_BIN       = $(NICI_BIN)
++# UP_INSTALL_LIB       = $(NICI_LIB)
++# UP_INSTALL_TCL       = $(NICI_SCRIPTS)
++# UP_INSTALL_UL_LIB    = $(UP_INSTALL_LIB)/uptools$(VERSION)
++
++ROOT                 = /app
++UP_INSTALL_LIB       = $(ROOT)/lib
++UP_INSTALL_BIN       = $(ROOT)/bin
++UP_INSTALL_TCL       = $(ROOT)/bin
++UP_INSTALL_UL_LIB    = $(ROOT)/lib/uptools$(VERSION)
+ 
+ INSTALL_MAKE_FLAGS   = UL_LIB=$(UP_INSTALL_LIB) UL_BIN=$(UP_INSTALL_BIN) SL_TARGET=$(UP_INSTALL_LIB)/libuplib$(VERSION)$(SLSUFFIX) L_TARGET=$(UP_INSTALL_LIB)/libuplib$(VERSION)$(LSUFFIX)
+ 
+@@ -91,16 +97,20 @@
  # it should say were to find them
  
  # on most systems:
@@ -43,11 +67,15 @@
  MAY_USE_RANLIB = echo
  
  ################################################################################
-@@ -165,7 +169,7 @@
+@@ -163,9 +173,9 @@
+ 
+ #################### LINUX SETTINGS ###################
  ##Linux#CC       = gcc
- ##Linux#CFLAGS   = -O4 -I. -I$(X11_INCLUDE) -Wall -pedantic -I$(UL_DIR)
- ##Linux#SLFLAGS  = -O4 -I. -I$(X11_INCLUDE) -fPIC -Wall -pedantic
+-##Linux#CFLAGS   = -O4 -I. -I$(X11_INCLUDE) -Wall -pedantic -I$(UL_DIR)
+-##Linux#SLFLAGS  = -O4 -I. -I$(X11_INCLUDE) -fPIC -Wall -pedantic
 -##Linux#SL_LD    = gcc -shared -Wl -o
++##Linux#CFLAGS   = -O4 -I. -I$(X11_INCLUDE) -Wall -pedantic -I$(UL_DIR) -L$(UL_LIB)
++##Linux#SLFLAGS  = -O4 -I. -I$(X11_INCLUDE) -fPIC -Wall -pedantic 
 +##Linux#SL_LD    = gcc -shared -o
  ##Linux#SLSUFFIX = .so
  ##Linux#LINK_LIBS     = -L/usr/X11R6/lib -lX11

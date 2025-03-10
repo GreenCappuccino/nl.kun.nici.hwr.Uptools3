@@ -1,0 +1,13 @@
+--- ./Tools/Upworks/generic/read_unipen.c	1999-05-19 05:34:54.000000000 -0500
++++ ./Tools/Upworks/generic/read_unipen.c	2025-03-09 05:11:31.979235092 -0400
+@@ -2082,8 +2082,9 @@
+ 	}\n\
+ 	set unipen_library {}\n\
+ 	set msg \"Can't find a usable upworks in the following directories: \n\"\n\
+-	foreach d $dirs\n\
++	foreach d $dirs {\n\
+ 		append msg \"  $d\n\"\n\
++	}\n\
+ 	append msg \"This probably means that Unipen wasn't installed properly.\n\"\n\
+ 	error $msg\n\
+ }\n\
